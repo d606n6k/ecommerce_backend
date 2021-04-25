@@ -6,22 +6,42 @@ const { Tag, Product, ProductTag } = require('../../models');
 router.get('/', async (req, res) => {
   // find all tags
   try {
-    const productData = await Tag.findAll({
+    const tagsData = await Tag.findAll({
       include: [{
         model: Product,
         attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
-      }
-     ]
+      }]
     });
-    res.status(200).json(productData);
+    res.status(200).json(tagsData);
   } catch (err) {
     res.status(500).json(err);
   }
   // be sure to include its associated Product data
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
+  try {
+    const singleProductData = await Tag.findOne({
+      include: {
+        model: Product,
+        attributes: ['product_name', 'price', 'stock', 'category_id']
+      },
+    });
+    res.status(200).json(singleProductData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+  // Tag.findOne({
+  //   where: {
+  //     id: req.params.id
+  //   },
+  //   include: {
+  //     model: Product,
+  //     attributes: ['product_name', 'price', 'stock', 'category_id']
+  //   }
+  // }).then()
   // be sure to include its associated Product data
 });
 
