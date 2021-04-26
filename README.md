@@ -36,7 +36,7 @@ Please watch this instructional walkthrough video: https://youtu.be/iEAfTyJPoEo
  
 ## Usage
 - Run `npm i` to install app dependencies
-- Configure your data base with the `./db/schema.sql` file
+- Configure your database with the `./db/schema.sql` file
 - Seed your database with the `npm seed` command. If this fails, please use `node seeds/index.js` 
 - Run `npm start` in the terminal to start the application!
 - Open Insomnia to test your API routes!
