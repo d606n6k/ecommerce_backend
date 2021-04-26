@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
       include: [{ model: Tag, through: ProductTag, as: 'product_tags' }],
     });
     if(!singleProductId){
-      res.status(404).json({Message: "The product ID you searched for does not exist!"})
+      res.status(404).json({Message: "The product ID you searched for does not exist!"});
     }
     res.status(200).json(singleProductId);
   } catch (err) {

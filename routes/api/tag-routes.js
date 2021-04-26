@@ -26,29 +26,58 @@ router.get('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-
-  // Tag.findOne({
-  //   where: {
-  //     id: req.params.id
-  //   },
-  //   include: {
-  //     model: Product,
-  //     attributes: ['product_name', 'price', 'stock', 'category_id']
-  //   }
-  // }).then()
-  // be sure to include its associated Product data
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new tag
+try {
+  const postTag = await Tag.create(req.body, {
+    where: {
+      id: req.params.id
+    },
+  });
+  if(!postTag){
+    res.status(404).json({Message: "The tag you are looking for is in another castle!"});
+  }
+  res.status(200).json(postTag);
+} catch (err) {
+  res.status(500).json(err);
+}
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
+try {
+  const tagUpdate = await Tag.update(req.body, {
+    where: {
+      id: req.params.id
+    },
+    
+  });
+  if(!tagUpdate){
+    res.status(404).json({Message: "The tag ID you are trying to update does not exist!"});
+  }
+  res.status(200).json(tagUpdate);
+} catch (err) {
+  res.status(500).json(err);
+}
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
+try {
+  const tagDelete = await Tag.destroy({
+    where: {
+      id: req.params.id
+    },
+  });
+  if(!tagDelete){
+    res.status(404).json({Message: "The tag id you are trying to delete does not exist!"});
+  }
+  res.status(200).json(tagDelete);
+} catch (err) {
+  res.status(500).json(err);
+}
 });
 
 module.exports = router;
