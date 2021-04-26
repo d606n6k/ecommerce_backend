@@ -47,6 +47,7 @@ License: MIT
 ## Built With Node.js And These Node Packages
 * [MySQL](https://www.mysql.com/)
 * [Express.js](https://expressjs.com/)
+* [Sequelize](https://www.npmjs.com/package/sequelize)
 * [Node.js](https://nodejs.org/en/)
 * [npmjs](https://docs.npmjs.com/)
 
